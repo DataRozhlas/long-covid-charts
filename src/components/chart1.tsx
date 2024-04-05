@@ -1,40 +1,104 @@
 import Highcharts from 'highcharts';
+import addHighchartsMore from 'highcharts/highcharts-more';
 
 import {
-    HighchartsProvider, HighchartsChart, Chart, XAxis, YAxis, Title, Subtitle, Legend, LineSeries
+    HighchartsProvider, HighchartsChart, Chart, XAxis, YAxis, BarSeries, ErrorBarSeries, Tooltip
 } from 'react-jsx-highcharts';
 
-const plotOptions = {
-    series: {
-        pointStart: 2010
-    }
-};
+addHighchartsMore(Highcharts);
 
+const plotOptions = {
+
+};
 
 export default function Chart1() {
     return (
         <div>
+            <h1 className="text-xl font-bold">Long Covid: Příznaky po sedmi měsících</h1>
             <HighchartsProvider Highcharts={Highcharts}>
                 <HighchartsChart plotOptions={plotOptions}>
-                    <Chart />
+                    <Chart marginRight={25} />
 
-                    <Title>Solar Employment Growth by Sector, 2010-2016</Title>
 
-                    <Subtitle>Source: thesolarfoundation.com</Subtitle>
+                    <Tooltip valueSuffix=' %' />
 
-                    <Legend layout="vertical" align="right" verticalAlign="middle" />
+                    <XAxis categories={[
+                        "dušnost",
+                        "mozková mlha",
+                        "pohybové symptomy",
+                        "únava",
+                        "tlak na hrudi",
+                        "nevolnost po námaze",
+                        "tachykardie",
+                        "bolesti hlavy",
+                        "bolesti kloubů",
+                        "problémy s pamětí",
+                        "problémy s řečí"
+                    ]}>
 
-                    <XAxis>
-                        <XAxis.Title>Time</XAxis.Title>
                     </XAxis>
 
-                    <YAxis>
-                        <YAxis.Title>Number of employees</YAxis.Title>
-                        <LineSeries name="Installation" data={[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]} />
-                        <LineSeries name="Manufacturing" data={[24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]} />
-                        <LineSeries name="Sales & Distribution" data={[11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]} />
-                        <LineSeries name="Project Development" data={[null, null, 7988, 12169, 15112, 22452, 34400, 34227]} />
-                        <LineSeries name="Other" data={[12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]} />
+                    <YAxis labels={{ formatter: function () { return this.isLast ? `${this.value} %` : this.value.toString() } }}>
+                        <YAxis.Title align='high'>Prevalence</YAxis.Title>
+                        <BarSeries pointPadding={0.1} groupPadding={0} color={"#B22222"} dataLabels={{ enabled: true, x: -65, format: "{y} %", color: "#FFFFFF", style: { textOutline: "none" } }} name="prevalence" data={[
+                            93,
+                            85.1,
+                            80.5,
+                            77.7,
+                            74.8,
+                            72.2,
+                            61.4,
+                            53.6,
+                            52.2,
+                            51,
+                            48.6
+                        ]} />
+                        <ErrorBarSeries name="95% interval spolehlivosti" data={[
+                            [
+                                92.2,
+                                93.8
+                            ],
+                            [
+                                83.9,
+                                86.2
+                            ],
+                            [
+                                79.3,
+                                81.8
+                            ],
+                            [
+                                74.9,
+                                80.3
+                            ],
+                            [
+                                73.4,
+                                76.1
+                            ],
+                            [
+                                69.3,
+                                75
+                            ],
+                            [
+                                59.8,
+                                62.9
+                            ],
+                            [
+                                51.5,
+                                55.5
+                            ],
+                            [
+                                50.5,
+                                53.8
+                            ],
+                            [
+                                49.1,
+                                53
+                            ],
+                            [
+                                47,
+                                50.2
+                            ]
+                        ]} />
                     </YAxis>
                 </HighchartsChart>
             </HighchartsProvider>
