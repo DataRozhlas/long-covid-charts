@@ -1,0 +1,1 @@
+[Jako první stadium demence, líčí muž život s long covidem. Jeden z 10 má dlouhodobé následky](https://www.irozhlas.cz/zpravy-domov/covid-long-covid-post-covidovy-syndrom-ziyad-al-aly-julie-dobrovolna_2404080500_ank)
